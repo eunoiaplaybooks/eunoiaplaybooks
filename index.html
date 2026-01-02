@@ -43,7 +43,7 @@
         img { max-width: 100%; height: auto; display: block; }
 
         .container {
-            max-width: 1000px; /* Slightly narrower for single product focus */
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -59,8 +59,8 @@
 
         .nav-flex { display: flex; justify-content: space-between; align-items: center; }
         
-        /* Top small logo */
-        .logo-nav { height: 50px; opacity: 0.8; } 
+        /* LOGO: He añadido un ancho para que no desaparezca si no carga */
+        .logo-nav { height: 50px; min-width: 50px; background: transparent; } 
 
         nav ul { display: flex; gap: 20px; list-style: none; }
         nav a { color: var(--primary); font-weight: 700; font-size: 1rem; }
@@ -72,7 +72,6 @@
             position: relative;
         }
 
-        /* Background Blobs */
         .blob {
             position: absolute;
             border-radius: 50%;
@@ -83,7 +82,6 @@
         .blob-1 { top: -10%; left: -10%; width: 400px; height: 400px; background: var(--accent); }
         .blob-2 { top: 20%; right: -5%; width: 300px; height: 300px; background: #dceeff; }
 
-        /* Main Floating Logo */
         .hero-main-logo {
             width: 220px;
             margin: 0 auto 30px auto;
@@ -113,7 +111,7 @@
             text-transform: uppercase;
         }
 
-        /* --- PRODUCT SECTION (SINGLE CARD) --- */
+        /* --- PRODUCT SECTION --- */
         #product { padding: 40px 0 80px; }
 
         .featured-card {
@@ -168,23 +166,21 @@
         
         .btn-mercado:hover { transform: translateY(-3px); }
 
-        /* --- ABOUT & FOOTER --- */
+        /* --- ABOUT (Alineado a la izquierda) --- */
         #about {
-            padding: 60px 0;
-            text-align: center;
-            max-width: 700px;
+            padding: 80px 0;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         footer {
             text-align: center;
-            padding: 40px 0;
+            padding: 60px 0;
             color: var(--primary);
             font-size: 0.9rem;
             opacity: 0.7;
         }
 
-        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2.2rem; }
             .hero-main-logo { width: 160px; }
@@ -235,7 +231,8 @@
                    Al finalizar, tendrás UN PLAN CONCRETO para tu próxima clase, usando una actividad simple pero transformadora con lente 5C.
                 </p>
                 
-                <div class="price-tag">$175 MXN</div> <a href="https://mpago.la/2ebT7Ju" class="btn-mercado" target="_blank">
+                <div class="price-tag">$175 MXN</div> 
+                <a href="https://mpago.la/2ebT7Ju" class="btn-mercado" target="_blank">
                     Pagar con Mercado Pago
                 </a>
                 
@@ -244,29 +241,30 @@
                 </p>
             </article>
         </div>
-    <section id="about" style="text-align: left; max-width: 800px; margin: 0 auto; padding: 20px;">
-    <h3 style="font-size: 2.5rem; color: #2c3e50; margin-bottom: 20px;">
-        Filosofía Eunoia
-    </h3>
+    </section> <section id="about">
+        <div class="container">
+            <h3 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 30px; text-align: left;">
+                Filosofía Eunoia
+            </h3>
 
-    <div style="text-align: left; line-height: 1.6; color: #4a4a4a; white-space: pre-line;">
-        Eunoia (εὔνοια) — del griego antiguo: eu (bueno, bien) + nous (mente, espíritu), significando "mente bella o buena". Todas esas cabecitas que piensan diferente y no tienen miedo a hacerlo.
+            <div style="text-align: left; line-height: 1.8; color: var(--text-dark); white-space: pre-line; font-size: 1.1rem;">
+                Eunoia (εὔνοια) — del griego antiguo: eu (bueno, bien) + nous (mente, espíritu), significando "mente bella o buena". Todas esas cabecitas que piensan diferente y no tienen miedo a hacerlo.
 
-        No encontramos este concepto en los métodos educativos del siglo XX, y sin embargo, es lo que todos los padres desean para sus hijos, lo que todos los educadores anhelan para sus estudiantes, lo que nuestra sociedad desesperadamente necesita: mentes bellas.
+                No encontramos este concepto en los métodos educativos del siglo XX, y sin embargo, es lo que todos los padres desean para sus hijos, lo que todos los educadores anhelan para sus estudiantes, lo que nuestra sociedad desesperadamente necesita: mentes bellas.
 
-        Montessori cultivó la autonomía. Waldorf cultivó la imaginación. Reggio cultivó la expresión. Pero nadie cultivó explícitamente la disposición fundamental de la mente hacia el bien, hacia la verdad, hacia la belleza y hacia el otro.
+                Montessori cultivó la autonomía. Waldorf cultivó la imaginación. Reggio cultivó la expresión. Pero nadie cultivó explícitamente la disposición fundamental de la mente hacia el bien, hacia la verdad, hacia la belleza y hacia el otro.
 
-        <b>Hasta ahora.</b>
-    </div>
-</section>
+                <strong>Hasta ahora.</strong>
+            </div>
+        </div>
+    </section>
 
     <footer>
-        <p>&copy; 2025 Eunoia Playbooks. 
-<p>Hecho con amor para personas que educan con amor.</p>
+        <p>&copy; 2025 Eunoia Playbooks.</p>
+        <p>Hecho con amor para personas que educan con amor.</p>
     </footer>
 
     <script>
-        // Simple entrance animation
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -277,10 +275,12 @@
         });
 
         const card = document.querySelector('.featured-card');
-        card.style.opacity = 0;
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'all 0.8s ease';
-        observer.observe(card);
+        if(card) {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.8s ease';
+            observer.observe(card);
+        }
     </script>
 </body>
 </html>
